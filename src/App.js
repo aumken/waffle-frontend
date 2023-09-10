@@ -111,7 +111,7 @@ function App() {
               onChange={handleInputChange}
             />
             {isValidYoutubeLink(youtubeLink) && videoDetails && (
-              <Button id="main" colorScheme="green" color="black" onClick={handleButtonClick}>
+              <Button id="main" colorScheme="white" backgroundColor="#fbdb83" color="black" ml={3} onClick={handleButtonClick}>
                 Go
               </Button>
             )}

@@ -12,7 +12,7 @@ function Chat({ videoId, videoTitle, channelName }) {
     const videoURL = "https://www.youtube.com/watch?v=" + videoId;
     const [transcript, setTranscript] = useState("")
     const [summary, setSummary] = useState("")
-    // const [links, setLinks] = useState([])
+    const [links, setLinks] = useState([])
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
@@ -24,7 +24,7 @@ function Chat({ videoId, videoTitle, channelName }) {
 
                 setTranscript(data.transcript);
                 setSummary(data.summary);
-                // setLinks(data.links);
+                setLinks(data.links);
                 setIsLoading(false); // Set loading to false when we've fetched data
 
             } catch (error) {
@@ -239,14 +239,14 @@ function Chat({ videoId, videoTitle, channelName }) {
                                     <Text fontWeight="bold">summary:</Text>
                                     <Text>{formatText(summary)}</Text>
 
-                                    {/*
+                                    
 
                                     <Text mt={4} fontWeight="bold">links of interest:</Text>
                                     {links.slice(0, 3).map((link, index) => (
                                         <Text key={index} as="a" href={link} target="_blank" rel="noopener noreferrer">{link}</Text>
                                     ))}
 
-                                    */}
+                                    
 
                                 </VStack>
                             </Box>
