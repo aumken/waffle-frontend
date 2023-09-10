@@ -12,7 +12,7 @@ function App() {
   const [videoDetails, setVideoDetails] = useState(null);
   const [showChat, setShowChat] = useState(false);
 
-  const API_KEY = process.env.API_URL;
+  const API_KEY = process.env.API_KEY;
 
   const getVideoIdFromLink = (link) => {
     let videoId = null;
