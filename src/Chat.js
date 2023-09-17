@@ -19,7 +19,7 @@ function Chat({ videoId, videoTitle, channelName }) {
         async function fetchData() {
             try {
                 setIsLoading(true); // Set loading to true when we start fetching
-                const response = await fetch('https://waffle-sie7.onrender.com/transcribe_and_summarize?url=' + videoURL);
+                const response = await fetch('https://waffle-backend.onrender.com/transcribe_and_summarize?url=' + videoURL);
                 const data = await response.json(); // Assuming the API responds with JSON
 
                 setTranscript(data.transcript);
@@ -47,7 +47,7 @@ function Chat({ videoId, videoTitle, channelName }) {
     };
 
     async function chatgpt(question) {
-        const response = await fetch("https://waffle-sie7.onrender.com/ask/", {
+        const response = await fetch("https://waffle-backend.onrender.com/ask/", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -234,22 +234,30 @@ function Chat({ videoId, videoTitle, channelName }) {
                                 <Image src={waffleImage} alt="Loading spinner" boxSize="50px" animation="spin 1s linear infinite" />
                             </Flex>
                         ) : (
-                            <Box flexGrow={1} bg="white" borderRadius="lg" p={2} w="100%" color="black" overflowY="auto">
-                                <VStack align="start" spacing={2}>
-                                    <Text fontWeight="bold">summary:</Text>
-                                    <Text>{formatText(summary)}</Text>
+                                <Box flexGrow={1} bg="white" borderRadius="lg" p={2} w="100%" color="black" overflowY="auto">
+                                    <VStack align="start" spacing={2}>
+                                        <Text fontWeight="bold">Summary:</Text>
+                                        <Text>{formatText(summary)}</Text>
 
-                                    
-
-                                    <Text mt={4} fontWeight="bold">links of interest:</Text>
-                                    {links.slice(0, 3).map((link, index) => (
-                                        <Text key={index} as="a" href={link} target="_blank" rel="noopener noreferrer">{link}</Text>
-                                    ))}
-
-                                    
-
-                                </VStack>
-                            </Box>
+                                        {Array.isArray(links) && links.length > 0 && (
+                                            <>
+                                                <Text mt={4} fontWeight="bold">Links of Interest:</Text>
+                                                {links.slice(0, 3).map((link, index) => (
+                                                    <Text
+                                                        key={index}
+                                                        as="a"
+                                                        href={link}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="custom-link"
+                                                    >
+                                                        {link}
+                                                    </Text>
+                                                ))}
+                                            </>
+                                        )}
+                                    </VStack>
+                                </Box>
                         )}
                     </VStack>
                 </GridItem>
