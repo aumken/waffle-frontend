@@ -22,15 +22,12 @@ function App() {
   }, []);
 
   const getVideoIdFromLink = (link) => {
-    let videoId = null;
-    if (typeof link === 'string') {
-      if (link.includes('youtu.be/')) {
-        videoId = link.split('youtu.be/')[1];
-      } else if (link.includes('youtube.com/watch?v=')) {
-        videoId = link.split('v=')[1].substring(0, 11);
-      }
+    const regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    const match = link.match(regExp);
+    if (match && match[2].length === 11) {
+      return match[2];
     }
-    return videoId && videoId.length === 11 ? videoId : null;
+    return null;
   }
 
 
