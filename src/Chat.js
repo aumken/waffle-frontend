@@ -14,6 +14,7 @@ function Chat({ videoId, videoTitle, channelName }) {
     const [summary, setSummary] = useState("")
     const [links, setLinks] = useState([])
     const [isLoading, setIsLoading] = useState(true);
+    const [messageSending, setMessageSending] = useState(false);
 
     useEffect(() => {
         async function fetchData() {
@@ -66,6 +67,7 @@ function Chat({ videoId, videoTitle, channelName }) {
 
 
     const handleSendMessage = async () => {
+        setMessageSending(true);
         const temp = currentMessage;
         setCurrentMessage('');
         if (temp.trim() !== '') {
@@ -74,6 +76,7 @@ function Chat({ videoId, videoTitle, channelName }) {
             // Initialize the ongoing message
             displayGptResponseWordByWord(gptResponse.answer);
         }
+        setMessageSending(false);
     };
 
     const displayGptResponseWordByWord = (responseText) => {
@@ -118,6 +121,10 @@ function Chat({ videoId, videoTitle, channelName }) {
                 onClick={() => window.location.reload()}
                 variant="outline"
                 color="white"
+                _hover={{
+                    backgroundColor: "#fbdb83",  // Light gray background on hover
+                    color: "black"                         // Text color changes to black on hover
+                }}
             >
                 back
             </Button>
@@ -161,7 +168,7 @@ function Chat({ videoId, videoTitle, channelName }) {
                     ></iframe>
                 </GridItem>
                 <GridItem borderRadius="lg" rowSpan={2} bg='#fbdb83'>
-                    <VStack spacing={4} h="100%" p={4} w="100%">
+                    <VStack spacing={2} h="100%" p={2} w="100%">
                         <Box
                             flexGrow={1}
                             bg="white"
@@ -193,7 +200,7 @@ function Chat({ videoId, videoTitle, channelName }) {
                         <HStack w="100%" spacing={2}>
                             <Input
                                 variant="filled"
-                                placeholder="chat with your video!"
+                                placeholder="Chat with your video!"
                                 _placeholder={{ color: "blackAlpha.700" }}
                                 value={currentMessage}
                                 onChange={(e) => setCurrentMessage(e.target.value)}
@@ -203,22 +210,27 @@ function Chat({ videoId, videoTitle, channelName }) {
                                 backgroundColor="white"
                                 color="black"
                                 _focus={{ bg: "white" }}  // Ensures the background remains white when focused
-                                isDisabled={isLoading}
+                                isDisabled={isLoading || messageSending}
                             />
                             <IconButton
+                                color="white"
                                 aria-label="Send message"
                                 icon={<ArrowForwardIcon />}
                                 borderRadius="lg"
                                 backgroundColor="#0093E9"
                                 onClick={handleSendMessage}
-                                isDisabled={isLoading}
+                                isDisabled={isLoading || messageSending}
+                                _hover={{
+                                    backgroundColor: "#cdd7de",  // Light gray background on hover
+                                    color: "black"                         // Text color changes to black on hover
+                                }}
                             />
                         </HStack>
 
                     </VStack>
                 </GridItem>
                 <GridItem h="100%" borderRadius="lg" bg='#fbdb83' overflowY="auto">
-                    <VStack spacing={4} h="100%" p={4} w="100%">
+                    <VStack spacing={2} h="100%" p={2} w="100%">
                         {isLoading ? (
                             <Flex
                                 flexGrow={1}

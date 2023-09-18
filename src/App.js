@@ -203,8 +203,8 @@ function App() {
                   borderWidth="1px"
                   borderRadius="lg"
                   overflow="hidden"
-                  backgroundColor="white"
-                  p={4}
+                    backgroundColor="#fbdb83"
+                  p={2}
                   width="300px"
                   display="flex"
                   flexDirection="column"
