@@ -122,7 +122,7 @@ function Chat({ videoId, videoTitle, channelName }) {
                 variant="outline"
                 color="white"
                 _hover={{
-                    backgroundColor: "#fbdb83",  // Light gray background on hover
+                    backgroundColor: "#cdd7de",  // Light gray background on hover
                     color: "black"                         // Text color changes to black on hover
                 }}
             >
@@ -167,7 +167,7 @@ function Chat({ videoId, videoTitle, channelName }) {
                         borderRadius="lg"
                     ></iframe>
                 </GridItem>
-                <GridItem borderRadius="lg" rowSpan={2} bg='#fbdb83'>
+                <GridItem borderRadius="lg" rowSpan={2} bg='#cdd7de'>
                     <VStack spacing={2} h="100%" p={2} w="100%">
                         <Box
                             flexGrow={1}
@@ -229,7 +229,7 @@ function Chat({ videoId, videoTitle, channelName }) {
 
                     </VStack>
                 </GridItem>
-                <GridItem h="100%" borderRadius="lg" bg='#fbdb83' overflowY="auto">
+                <GridItem h="100%" borderRadius="lg" bg='#cdd7de' overflowY="auto">
                     <VStack spacing={2} h="100%" p={2} w="100%">
                         {isLoading ? (
                             <Flex
